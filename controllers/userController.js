@@ -2,8 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
-const signup = async (req, res) => {
+exports.signup = async (req, res) => {
   const { name, email, password, role, phone, address, profilePic } = req.body;
 
   try {
@@ -30,7 +29,7 @@ const signup = async (req, res) => {
   }
 };
 
-const signin = async (req, res) => {
+exports.signin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -59,7 +58,7 @@ const signin = async (req, res) => {
   }
 };
 
-const getUserProfile = async (req, res) => {
+exports.getUserProfile = async (req, res) => {
   const userId = req.userId;
 
   try {
@@ -84,8 +83,6 @@ const getUserProfile = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
+exports.logout = async (req, res) => {
   res.status(200).json({ message: 'Logged out successfully' });
 };
-
-module.exports = { signup, signin, getUserProfile, logout };
